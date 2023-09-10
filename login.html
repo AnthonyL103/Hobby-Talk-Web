@@ -1,0 +1,46 @@
+<!-- extends base template-->
+{% extends "base.html" %} 
+<!-- ovverides title block-->
+{% block title %}Login{% endblock %}
+{% block content %}
+<!-- you can execute basic expressions and display variables but cant do everything in python-->
+<form method="POST">
+    <!--new header-->
+    <h3 align="CENTER">Log in</H3>
+    <!--Form groups are used to wrap labels and form controls in a div to get optimum spacing between the label and the control-->
+    <div class ="form-group">
+        <!-- labels are used to define a caption for form control elements-->
+        <label for="email">Email Address</label>
+        <!-- creates input field for our user to  -->
+        <!--bootstrap controls display data or make it easier for users to enter or edit data, perform an action, or make a selection-->
+        <!--in this case we are using form control-->
+        <!--name is what the attribute is going to be called when we pass to backend -->
+        <input 
+            type="email"
+            class="form-control" 
+            id="email" 
+            name="email"
+            placeholder="Enter email" 
+        />
+    </div>
+    <div class ="form-group">
+        <!-- labels are used to define a caption for form control elements-->
+        <label for="password">Password</label>
+        <!-- creates input field for our user to  -->
+        <!--bootstrap controls display data or make it easier for users to enter or edit data, perform an action, or make a selection-->
+        <!--in this case we are using form control-->
+        <!--name is what the attribute is going to be called when we pass to backend -->
+        <input 
+            type="password"
+            class="form-control" 
+            id="password" 
+            name="password"
+            placeholder="Enter password" 
+        />
+    </div>
+    <!-- html break syntax-->
+    <br />
+    <!-- initializes button to submite all user info-->
+    <button type="Submit" class="btn btn-primary">Login</button>   
+</form>
+{%endblock%}

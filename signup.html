@@ -1,0 +1,78 @@
+<!-- extends base template-->
+{% extends "base.html" %} 
+<!-- ovverides title block-->
+{% block title %}Signup{% endblock %}
+{% block content %}
+
+<!--form method post (post request) means the browser will send all the data input to the web server to be processed-->
+<!--form method post also encrypts the data which is useful for sensitive data-->
+<form method="POST">
+    <!--new header-->
+    <h3 align="CENTER">Sign Up</H3>
+    <!--Form groups are used to wrap labels and form controls in a div to get optimum spacing between the label and the control-->
+    <div class ="form-group">
+        <!-- labels are used to define a caption for form control elements-->
+        <label for="email">Email Address</label>
+        <!-- creates input field for our user to  -->
+        <!--bootstrap controls display data or make it easier for users to enter or edit data, perform an action, or make a selection-->
+        <!--in this case we are using form control-->
+        <!--name is what the attribute is going to be called when we pass to backend -->
+        <input 
+            type="email"
+            class="form-control" 
+            id="email" 
+            name="email"
+            placeholder="Enter email" 
+        />
+    </div>
+    <div class ="form-group">
+        <!-- labels are used to define a caption for form control elements-->
+        <label for="firstname">First Name</label>
+        <!-- creates input field for our user to  -->
+        <!--bootstrap controls display data or make it easier for users to enter or edit data, perform an action, or make a selection-->
+        <!--in this case we are using form control-->
+        <!--name is what the attribute is going to be called when we pass to backend -->
+        <input 
+            type="text"
+            class="form-control" 
+            id="firstname" 
+            name="firstname"
+            placeholder="Enter first name" 
+        />
+    </div>
+    <div class ="form-group">
+        <!-- labels are used to define a caption for form control elements-->
+        <label for="password1">Password</label>
+        <!-- creates input field for our user to  -->
+        <!--bootstrap controls display data or make it easier for users to enter or edit data, perform an action, or make a selection-->
+        <!--in this case we are using form control-->
+        <!--name is what the attribute is going to be called when we pass to backend -->
+        <input 
+            type="password"
+            class="form-control" 
+            id="password1" 
+            name="password1"
+            placeholder="Enter password" 
+        />
+    </div>
+    <div class ="form-group">
+        <!-- labels are used to define a caption for form control elements-->
+        <label for="password2">Password</label>
+        <!--creates input field for our user to  -->
+        <!--bootstrap controls display data or make it easier for users to enter or edit data, perform an action, or make a selection-->
+        <!--in this case we are using form control-->
+        <!--name is what the attribute is going to be called when we pass to backend -->
+        <input 
+            type="password"
+            class="form-control" 
+            id="password2" 
+            name="password2"
+            placeholder="Confirm password" 
+        />
+    </div>
+    <!-- html break syntax-->
+    <br />
+    <!-- initializes button to submite all user info-->
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

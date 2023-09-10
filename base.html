@@ -1,0 +1,130 @@
+<!-- Create a base template which is our theme for our website -->
+<!-- bracket percent syntax is not a standard part of HTML but rather a part of dev framworks like Django and Jinja -->
+<!-- these templates allow you to embed programming logic like if statement and loops into your html templates} -->
+<!-- all these links allows us to link our base template to bootstrap which gives us all these classes-->
+<!-- these bootstrap classes allow us to apply front-end framwork and use templates for forms, buttons, navigation, etc. 
+  in our templates for our webpages making web dev easier and faster-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <!-- Include Bootstrap CSS framework for styling, link to a cvn which is a content deliv network -->
+    <!-- by doing this it makes our html look nice -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    
+    <!-- Include Font Awesome CSS for icons -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin="anonymous"
+    />
+
+    <!-- Set the title block of the page (can be overridden in child templates) -->
+    <!-- our children template will inherit our base template, but everything can change for what is in our child template -->
+    <title>{% block title %}Home{% endblock %}</title>
+  </head>
+  <body>
+    <!-- Create a navigation bar using Bootstrap -->
+    <!-- loads fancy animations for buttons and over visual styles from bootstrap that uses Javascript-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <!-- lets use toggle size for accssing application on smartphones-->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbar"
+      >
+      
+        <!-- loads icon for us-->
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!--we are initializing a collapsable navbar-->
+      <!--div is a block level container in html that allows us to group and structure content-->
+      <!--div has no styling by default, it is used to apply CSS styles, provide structure, and make it easier to target and manipulate content using JavaScript.-->
+      <div class="collapse navbar-collapse" id="navbar">
+        <div class="navbar-nav">
+          <!-- Display different navigation links based on user authentication status -->
+          <!-- if statement saying unless user is logged in it will only display login and sign-up routes-->
+          <a class="nav-item nav-link" id="home" href="/">Home</a>
+          <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+          <a class="nav-item nav-link" id="login" href="/login">Login</a>
+          <a class="nav-item nav-link" id="signup" href="/sign-up">Sign Up</a>
+        </div>
+      </div>
+    </nav>
+    <!-- This code is typically found in a template file of a web application and is written using a template engine like Jinja2 or a similar system. -->
+    <!-- The "with" statement is used to assign the result of "get_flashed_messages()" to the "messages" variable. 
+      The "with_categories=True" argument ensures that messages are grouped by category. -->
+    {% with messages = get_flashed_messages(with_categories = true)%}
+    <!-- This block checks if there are any flashed messages to display. -->
+    {% if messages %}
+      <!-- This loop iterates through each flashed message and its associated category. -->
+      {% for category, message in messages %}
+      <!-- This conditional statement checks if the category of the message is 'error'. If it is, it displays an error message. -->
+      {%if category =='error'%}
+      <!-- 
+        alert: This class is used to create an alert box.
+        alert-danger: This class specifies the styling and color scheme for a danger or error alert. In Bootstrap, alerts can have different contextual styles, such as success (alert-success), info (alert-info), warning (alert-warning), and danger (alert-danger), among others.
+        alert-dismissible: This class makes the alert box dismissible, meaning it includes a close button.
+        fade: This class adds a fading transition effect when the alert is dismissed.
+        show: This class is used to initially display the alert.
+        The code also includes HTML elements and placeholders for dynamic content:
+      -->
+      <div class="alert alert-danger alter-dissmissable fade show" role="alert">
+        {{ message }}
+        <!--button for dismissing the alert. It includes a Bootstrap class (close) to 
+        style the button and a data-dismiss attribute that specifies that clicking the button should dismiss the alert.
+        -->
+        <button type="button" class="'close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- If the category is not 'error', it is assumed to be a success message. -->
+      {%else%}
+      <div class="alert alert-success alter-dissmissable fade show" role="alert">
+        {{ message }}
+        <button type="button" class="'close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <!-- defines end of operation blocks, this is used in template engines to maintain structure 
+    and organization within your code/logic-->  
+      {%endif%}
+      {%endfor%}
+    {%endif%}
+    {%endwith%}
+    <!-- used to overrid so we can put content on the scrren-->
+    <!-- contianer makes it so the content is floating off the scrren, and a-->
+    <div class="container">
+    <!--  block  and  endblock  are used to define and extend templates. 
+    kind of like defining functions in html but can have placeholders and other content -->
+    <!-- creates a block that will show up on the screen if you render it in child template-->
+    {% block content %}
+    <!-- ends the block-->
+    {% endblock %}
+    <!-- Include JavaScript libraries (jQuery, Popper.js, Bootstrap) -->
+    <div>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
