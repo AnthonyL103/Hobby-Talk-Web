@@ -52,10 +52,22 @@
         <div class="navbar-nav">
           <!-- Display different navigation links based on user authentication status -->
           <!-- if statement saying unless user is logged in it will only display login and sign-up routes-->
-          <a class="nav-item nav-link" id="home" href="/">Home</a>
-          <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
-          <a class="nav-item nav-link" id="login" href="/login">Login</a>
-          <a class="nav-item nav-link" id="signup" href="/sign-up">Sign Up</a>
+          
+          {% if current_user.is_authenticated %}
+          <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/sign-up">Sign Up</a>
+            </li>
+          {% endif %}
         </div>
       </div>
     </nav>
@@ -126,5 +138,10 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
+    <script 
+      type = "text/javascript"
+      src="{{ url_for('static', filename='index.js')}}"
+    ></script>
+    
   </body>
 </html>

@@ -3,5 +3,42 @@
 <!-- ovverides title block-->
 {% block title %}Home{% endblock %}
 {% block content %}
-<h1>Homepage</h1>
+<!--creates a form so user can add images-->
+<h2 align="center">Project Images</h2>
+<ul class="image-list" id="images">
+    {% for image in user.images %}
+    <li class="image-item">
+        <img src="{{ image.file_path }}" alt="Image">
+    </li>
+    {% endfor %}
+</ul>
+<form method="POST" enctype="multipart/form-data">
+    <!-- Use the "name" attribute to specify the form field name for the image file. -->
+    <input type="file" id="imageInput" accept="image/*" name="image"> 
+    <div align="center">
+        <button type="submit" class="btn-primary">Add Image</button>
+    </div>
+</form>
+<br />
+<div>
+ <h2 align ="center">Project Instructions</h2>
+ <ul class= "list-group list-group-flush" id="notes">
+    {% for note in user.notes %}
+    <li class="list-group-item">{{note.data}}
+     <!-- delete note id by using another button and setting the id to the note we want to delete-->
+     <button type ="button" class="close" onClick= "deleteNote({{note.id}})">
+         <span aria-hidden="true">&times;</span>
+     </button>
+    </li>
+    {% endfor %}
+ </ul>
+    
+ <form method="POST">
+    <textarea name="note" id="note" class="form-control"></textarea>
+    <br />
+    <div align="center">
+        <button type="submit" class="btn-primary">Add Step</button>
+    </div>
+ </form>
+</div>
 {% endblock %}
