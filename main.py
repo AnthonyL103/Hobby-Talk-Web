@@ -2,9 +2,10 @@ from Website import create_app
 import os
 #imports create_app from Website which creates an application for the entire program 
 app = create_app()
+app.config['RELATIVE_UPLOAD_PATH'] = 'uploads'  # Replace with your actual relative path
 
 # Configure the UPLOAD_FOLDER
-app.config['UPLOAD_FOLDER'] = '/Users/anthonyli/Desktop/WebDevelopmentProject/uploads'  # Replace with the desired directory path
+app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), app.config['RELATIVE_UPLOAD_PATH'])
 
 # Ensure the specified directory exists
 if not os.path.exists(app.config['UPLOAD_FOLDER']):

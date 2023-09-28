@@ -32,11 +32,11 @@ def home():
             if image.filename != '':
                 # Ensure a secure filename and specify the upload directory
                 filename = secure_filename(image.filename)
-                upload_dir = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
-                image.save(upload_dir)
+                relative_path = os.path.join(current_app.config['RELATIVE_UPLOAD_PATH'], filename)
+                image.save(relative_path)
 
                 # Create a new Image object and store the image information in the database
-                new_image = Image(file_path=upload_dir, user_id=current_user.id)
+                new_image = Image(file_path=relative_path, user_id=current_user.id)
                 db.session.add(new_image)
                 db.session.commit()
                 flash('Image uploaded successfully!', category='success')
@@ -63,3 +63,17 @@ def delete_note():
             db.session.commit()
     return jsonify({})
 
+@views.route('/delete-image', methods=['POST'])
+def delete_image():
+    image = json.loads(request.data)
+    image_id = image['imageId']
+    print(image_id)
+    # Assuming you have an Image model with an 'id' field
+    image = Image.query.get(image_id)
+    if image:
+        # Check if the user owns this image (you may have to adapt this part)
+        if image.user_id == current_user.id:
+            # Delete the image
+            db.session.delete(image)
+            db.session.commit()
+    return jsonify({})

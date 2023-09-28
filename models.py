@@ -23,7 +23,7 @@ class Image(db.Model):
 
     # Add a foreign key to associate the image with a user or note.
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    note_id = db.Column(db.Integer, db.ForeignKey('note.id'))
+    
 
 
 #All Users need to look like this

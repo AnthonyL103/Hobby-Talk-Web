@@ -8,9 +8,12 @@
 <ul class="image-list" id="images">
     {% for image in user.images %}
     <li class="image-item">
-        <img src="{{ image.file_path }}" alt="Image">
+        <img src="{{ url_for('static', filename=image.jpg) }}" alt="Image">
+        <button type="button" class="close" onClick="deleteImage({{image.id }})">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </li>
-    {% endfor %}
+    {% endfor %}   
 </ul>
 <form method="POST" enctype="multipart/form-data">
     <!-- Use the "name" attribute to specify the form field name for the image file. -->
